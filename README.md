@@ -16,3 +16,4 @@ Presentations:
 [Lecture 1](https://hackmd.io/@lZfE8oEoSYCXuLcnPjZgrw/H1Cc71UdWg)
 [Lecture 2](https://hackmd.io/@lZfE8oEoSYCXuLcnPjZgrw/Hk27BkLuWg#/)
 [Lecture 3](https://hackmd.io/@lZfE8oEoSYCXuLcnPjZgrw/SkrO6CA_Zl)
+[Lecture 4](https://hackmd.io/@lZfE8oEoSYCXuLcnPjZgrw/SkivKQuFWx)
