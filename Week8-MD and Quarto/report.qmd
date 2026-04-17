@@ -50,3 +50,31 @@ ggplot(bb_data, aes(x = Season, y = Viewers, group = 1)) +
   theme_minimal() +
   labs(y = "Viewers (Millions)", x = "Season")
 ```
+---
+
+## 📉 Season-to-Season Changes
+
+Looking at the data, the transition from Season 1 to Season 4 saw incredibly consistent, slow growth. However, the true explosion occurred in its final season, which AMC split into two parts. 
+
+As shown in @fig-combined, the absolute viewership growth from the premiere to the finale was `r total_growth` million viewers. The single largest leap between blocks was a massive surge of `r highest_jump` million additional viewers.
+
+```{r, fig.width = 8, fig.height = 4}
+#| label: fig-combined
+#| fig-cap: "Detailed breakdown of Breaking Bad viewership."
+#| fig-subcap: 
+#|   - "Total Viewers by Season"
+#|   - "Season-to-Season Change"
+#| layout-ncol: 2
+
+# Plot 1: Standard Bar Chart
+ggplot(bb_data, aes(x = Season, y = Viewers)) +
+  geom_col(fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(y = "Average Viewers (Millions)", x = "Season")
+
+# Plot 2: Growth Bar Chart (Excluding Season 1)
+ggplot(bb_data[-1, ], aes(x = Season, y = Change)) +
+  geom_col(fill = "darkred", alpha = 0.8) +
+  theme_minimal() +
+  labs(y = "Change in Viewers (Millions)", x = "Transition")
+```
