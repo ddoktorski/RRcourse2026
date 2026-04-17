@@ -1,0 +1,52 @@
+---
+title: "Breaking Bad Viewership Analysis"
+format: html
+---
+
+---
+
+![](https://upload.wikimedia.org/wikipedia/commons/7/77/Breaking_Bad_logo.svg)
+
+```{r setup, include=FALSE}
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+
+bb_data <- data.frame(
+  Season = c("S1", "S2", "S3", "S4", "S5A", "S5B"),
+  Viewers = c(1.23, 1.30, 1.52, 1.87, 2.60, 6.04)
+)
+
+# Calculate season-to-season change for our analysis
+bb_data <- bb_data %>%
+  mutate(Change = Viewers - lag(Viewers, default = 0))
+
+typical_width <- 6
+typical_height <- 4
+
+s1_viewers <- bb_data$Viewers[1]
+s5b_viewers <- bb_data$Viewers[6]
+total_growth <- s5b_viewers - s1_viewers
+highest_jump <- max(bb_data$Change, na.rm = TRUE)
+```
+
+## 📺 About the Show
+
+*Breaking Bad* is an American television drama series created by *Vince Gilligan* for AMC. The critically acclaimed series follows *Walter White*, a mild-mannered high school chemistry teacher living in Albuquerque, New Mexico. After being diagnosed with terminal lung cancer, *Walter* turns to a life of crime to secure his family's financial future before he dies.
+
+## 📈 Viewership Over Time
+
+While it started with a relatively modest audience of `r s1_viewers` million viewers in its first season, word-of-mouth and its later availability on streaming platforms helped turn it into a cultural phenomenon. By the final stretch of episodes, the average viewership skyrocketed to `r s5b_viewers` million. 
+
+This dramatic growth curve is clearly visible in @fig-viewership.
+
+```{r, fig.width = typical_width, fig.height = typical_height}
+#| label: fig-viewership
+#| fig-cap: "Average viewership per season/part of Breaking Bad."
+
+ggplot(bb_data, aes(x = Season, y = Viewers, group = 1)) +
+  geom_line(color = "darkgreen", linewidth = 1) +
+  geom_point(color = "black", size = 3) +
+  theme_minimal() +
+  labs(y = "Viewers (Millions)", x = "Season")
+```
